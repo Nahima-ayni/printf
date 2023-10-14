@@ -39,4 +39,4 @@ Here are some short notes on how to approach creating such a project:
 12. Maintenance:
     Be prepared to maintain your custom `printf` function as your project evolves. Handle bug fixes, enhancements, and updates as necessary.
 
-Creating a custom `printf` function can be a valuable exercise for understanding string formatting and working with variable argument lists in C or C++. It's also a great way to tailor output formatting to your specific project needs.
+It's also a great way to tailor output formatting to your specific project needs.
