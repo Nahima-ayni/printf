@@ -10,6 +10,9 @@
 int _printf(const char *format, ...)
 {
 	int length = 0;
+	char _buffer[SIZE_OF_BUFFER];
+	int indexbuffer = 0;
+	int str_len = 0;
 	va_list format_spec;
 
 	va_start(format_spec, format);
@@ -23,29 +26,33 @@ int _printf(const char *format, ...)
 			switch (*format)
 			{
 				case 'c':
-					putchar(va_arg(format_spec, int));
+					_buffer[indexbuffer++] = (va_arg(format_spec, int));
 					length++;
 					break;
 				case 's':
-					_string(va_arg(format_spec, char *));
+					str_len = _string(va_arg(format_spec, char *), _buffer, &indexbuffer);
+					length += str_len;
 					break;
 				case '%':
-					putchar('%');
+					_buffer[indexbuffer++] = ('%');
 					length++;
 					break;
 				default:
-					putchar('%');
+					_buffer[indexbuffer++] = ('%');
 					length++;
 					break;
 			}
 		}
 		else
 		{
-			putchar(*format);
+			_buffer[indexbuffer++] = (*format);
 			length++;
 		}
 		format++;
+		if (indexbuffer == SIZE_OF_BUFFER)
+			printbuff(_buffer, &indexbuffer);
 	}
+	printbuff(_buffer, &indexbuffer);
 	va_end(format_spec);
 	return (length);
 }
@@ -55,18 +62,35 @@ int _printf(const char *format, ...)
  * @str: string
  * Return: always succes
  */
-int _string(char *str)
+int _string(char *str, char _buffer[], int *indexbuffer)
 {
 	int length = 0;
-
 	if (str != NULL)
 	{
 		while (*str)
 		{
-			putchar(*str);
+			_buffer[*indexbuffer] = *str;
+			(*indexbuffer)++;
 			length++;
 			str++;
+
+			if (*indexbuffer == SIZE_OF_BUFFER)
+				printbuff(_buffer, &indexbuffer);
 		}
 	}
 	return (length);
+}
+
+/**
+ * printbuff - output the content of _buffer
+ * @_buffer: an array
+ * @indexbuffer: index of array
+ */
+void printbuff(char _buffer[], int *indexbuffer)
+{
+	if (*indexbuffer > 0)
+	{
+		write(1, _buffer, *indexbuffer);
+		*indexbuffer = 0;
+	}
 }
