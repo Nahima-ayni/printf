@@ -12,7 +12,7 @@ int _printf(const char *format, ...)
 {
 	char *str, next_arg;
 	const char *n = format;
-	int length = 0;
+	int length = 0, b = 0, func_len = 0;
 	va_list format_spec;
 
 	va_start(format_spec, format);
@@ -40,6 +40,12 @@ int _printf(const char *format, ...)
 				write(1, str, 1);
 				length++;
 				str++;
+			}
+			else if (*n == 'd' || *n == 'i')
+			{
+				b = va_arg(format_spec, int);
+				func_len = _integers(b);
+				length += func_len;
 			}
 			else if (*n == '%')
 			{
