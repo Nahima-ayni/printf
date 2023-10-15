@@ -20,7 +20,7 @@ int _printf(const char *format, ...)
 	{
 		if (*n != '%')
 		{
-			putchar(*n);
+			write(1, n, 1);
 			length++;
 		}
 		else
@@ -31,19 +31,19 @@ int _printf(const char *format, ...)
 			else if (*n == 'c')
 			{
 				next_arg = va_arg(format_spec, int);
-				putchar(next_arg);
+				write(1, &next_arg, 1);
 				length++;
 			}
 			else if (*n == 's')
 			{
 				str = va_arg(format_spec, char *);
-				putchar(*str);
+				write(1, str, 1);
 				length++;
 				str++;
 			}
 			else if (*n == '%')
 			{
-				putchar('%');
+				write(1, "%", 1);
 				length++;
 			}
 		}
