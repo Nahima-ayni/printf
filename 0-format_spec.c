@@ -21,9 +21,8 @@ int c_specifier(va_list format_specifier)
  */
 int mod_specifier(va_list format_specifier)
 {
-	const char *modulo = va_arg(format_specifier, const char*);
-
-	write(1, &modulo, 1);
+	(void)format_specifier;
+	write(1, "%", 1);
 	return (1);
 }
 
