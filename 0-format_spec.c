@@ -1,59 +1,62 @@
 #include "main.h"
-#include <stdarg.h>
-#include <stdio.h>
-#include <unistd.h>
+
 /**
- * _printf - function name
- * @format: constant char
- * Return: number of characters printed
+ * c_specifier - funcion name
+ * @format_specifier: our va_list name
+ * Return: always success
  */
-
-int _printf(const char *format, ...)
+int c_specifier(va_list format_specifier)
 {
-	char *str, next_arg;
-	const char *n = format;
-	int length = 0, b = 0, func_len = 0;
-	va_list format_spec;
+	char character;
 
-	va_start(format_spec, format);
-	for (; *n != '\0'; n++)
+	character = va_arg(format_specifier, int);
+
+	write(1, &character, 1);
+	return (1);
+}
+
+/**
+ * mod_specifier - function name
+ * Return: always success
+ */
+int mod_specifier(va_list format_specifier)
+{
+	const char *modulo = va_arg(format_specifier, const char*);
+
+	write(1, &modulo, 1);
+	return (1);
+}
+
+/**
+ * s_specifier - our function name
+ * @format_specifier: string
+ * Return: always success
+ */
+int s_specifier(va_list format_specifier)
+{
+	char *str;
+	int i;
+	int length = 0;
+
+	str = va_arg(format_specifier, char *);
+	if (str == NULL)
 	{
-		if (*n != '%')
+		str = "(null)";
+		length = _slength(str);
+		for (i = 0; i < length; i++)
 		{
-			write(1, n, 1);
-			length++;
-		}
-		else
-		{
-			n++;
-			if (*n == '\0')
-				break;
-			else if (*n == 'c')
-			{
-				next_arg = va_arg(format_spec, int);
-				write(1, &next_arg, 1);
-				length++;
-			}
-			else if (*n == 's')
-			{
-				str = va_arg(format_spec, char *);
-				write(1, str, 1);
-				length++;
-				str++;
-			}
-			else if (*n == 'd' || *n == 'i')
-			{
-				b = va_arg(format_spec, int);
-				func_len = _integers(b);
-				length += func_len;
-			}
-			else if (*n == '%')
-			{
-				write(1, "%", 1);
-				length++;
-			}
+			write(1, str, 1);
+			str++;
 		}
 	}
-	va_end(format_spec);
+	else
+	{
+		length = _slength(str);
+		for (i = 0; i < length; i++)
+		{
+			write(1, str, 1);
+			str++;
+		}
+	}
 	return (length);
 }
