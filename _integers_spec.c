@@ -41,8 +41,9 @@ int d_specifier(va_list format_specifier)
 			i++;
 		}
 	}
-	last = last + '0';
+	last = lastint + '0';
 	write(1, &last, 1);
+	i++;
 	return (i);
 }
 
@@ -87,7 +88,8 @@ int i_specifier(va_list format_specifier)
 			i++;
 		}
 	}
-	last = last + '0';
+	last = lastint + '0';
 	write(1, &last, 1);
+	i++;
 	return (i);
 }

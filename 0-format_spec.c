@@ -41,21 +41,14 @@ int s_specifier(va_list format_specifier)
 	if (str == NULL)
 	{
 		str = "(null)";
-		length = _slength(str);
-		for (i = 0; i < length; i++)
-		{
-			write(1, str, 1);
-			str++;
-		}
 	}
-	else
+
+	length = _slength(str);
+
+	for (i = 0; i < length; i++)
 	{
-		length = _slength(str);
-		for (i = 0; i < length; i++)
-		{
-			write(1, str, 1);
-			str++;
-		}
+		write(1, str, 1);
+		str++;
 	}
 	return (length);
 }
