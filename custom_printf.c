@@ -7,58 +7,33 @@
  */
 int _printf(const char *format, ...)
 {
-	int character_printed = 0, i = 0, spec_found = 0, spec_chars = 0;
-	size_t v;
+	int character_printed = 0, i = 0, v;
 	va_list formspec_args;
 	specifier m[] = { {"%s", s_specifier}, {"%c", c_specifier},
 		{"%i", i_specifier}, {"%d", d_specifier}, {"%%", mod_specifier} };
 
 	va_start(formspec_args, format);
-	while (format[i])
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+	return (-1);
+
+Here:
+	while (format[i] != '\0')
 	{
-		if (format[i] == '%' && format[i + 1] != '\0')
+		v = 4;
+		while (v >= 0)
 		{
-			if (format[i + 1] == '%')
+			if (m[v].format_specifier[0] == format[i] &&
+					m[v].format_specifier[1] == format[i + 1])
 			{
-				for (v = 0; v < sizeof(m) / sizeof(m[0]); v++)
-				{
-					if (format[i + 1] == *m[v].format_specifier)
-					{
-						spec_chars = m[v].signature(formspec_args);
-						character_printed += spec_chars * 2;
-						i++;
-						spec_found = 1;
-						break;
-					}
-				}
-				if (spec_found == 0)
-				{
-					write(1, &format[i], 1);
-					character_printed++;
-				}
+				character_printed += m[v].signature(formspec_args);
+				i = i + 2;
+				goto Here;
 			}
-			else
-			{
-				for (v = 0; v < sizeof(m) / sizeof(m[0]); v++)
-				{
-					write(1, &format[i], 2);
-					character_printed += m[v].signature(formspec_args);
-					i++;
-					spec_found = 1;
-					break;
-				}
-				if (spec_found == 0)
-				{
-					write(1, &format[i], 1);
-					character_printed++;
-				}
-				else
-				{
-					character_printed += 2;
-				}
-			}
+			v--;
 		}
-	i++;
+		write(1, &format[i], 1);
+		character_printed++;
+		i++;
 	}
 	va_end(formspec_args);
 	return (character_printed);

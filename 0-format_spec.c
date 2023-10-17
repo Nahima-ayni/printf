@@ -19,10 +19,11 @@ int c_specifier(va_list format_specifier)
  * mod_specifier - function name
  * Return: always success
  */
-int mod_specifier(va_list format_specifier)
+int mod_specifier(void)
 {
-	(void)format_specifier;
-	write(1, "%", 1);
+	char c = 37;
+
+	write(1, &c, 1);
 	return (1);
 }
 
@@ -43,19 +44,14 @@ int s_specifier(va_list format_specifier)
 		str = "(null)";
 		length = _slength(str);
 		for (i = 0; i < length; i++)
-		{
-			write(1, str, 1);
-			str++;
-		}
+			write(1, &str[i], 1);
+		return (length);
 	}
 	else
 	{
 		length = _slength(str);
 		for (i = 0; i < length; i++)
-		{
-			write(1, str, 1);
-			str++;
-		}
+			write(1, &str[i], 1);
+		return (length);
 	}
-	return (length);
 }
