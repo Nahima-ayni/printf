@@ -23,5 +23,5 @@ int i_specifier(va_list format_specifier);
 int d_specifier(va_list format_specifier);
 int _slength(char *len);
 int _clength(char *clen);
-
+int _putchar(char c);
 #endif

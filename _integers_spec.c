@@ -1,93 +1,89 @@
 #include "main.h"
 
 /**
- *d_specifier - prints when %d is used
- *@format_specifier: the string passed
- *Return: always success
+ * d_specifier - function name
+ * @format_specifier: va_list name
+ * Return: always success
+ *
  */
 int d_specifier(va_list format_specifier)
 {
-	int number = va_arg(format_specifier, int);
-	int figure, lastint = number % 10, digit, exp = 1;
-	int i = 1;
-	char digitint, last;
+	int next_argniaz = va_arg(format_specifier, int);
+	int numbs, last_digit = next_argniaz % 10, figure, answer = 1;
+	int q = 1;
 
-	number = number / 10;
-	figure = number;
+	next_argniaz = next_argniaz / 10;
+	numbs = next_argniaz;
 
-	if (lastint < 0)
+	if (last_digit < 0)
 	{
-		write(1, "-", 1);
-		figure = -figure;
-		number = -number;
-		lastint = -lastint;
-		i++;
+		_putchar('-');
+		numbs = -numbs;
+		next_argniaz = -next_argniaz;
+		last_digit = -last_digit;
+		q++;
 	}
-	if (figure > 0)
+	if (numbs > 0)
 	{
-		while (figure / 10 != 0)
+		while (numbs / 10 != 0)
 		{
-			exp = exp * 10;
-			figure = figure / 10;
+			answer = answer * 10;
+			numbs = numbs / 10;
 		}
-		figure = number;
-		while (exp > 0)
+		numbs = next_argniaz;
+		while (answer > 0)
 		{
-			digit = figure / exp;
-			digitint = digit + '0';
-			write(1, &digitint, 1);
-			figure = figure - (digit * exp);
-			exp = exp / 10;
-			i++;
+			figure = numbs / answer;
+			_putchar(figure + '0');
+			numbs = numbs - (figure * answer);
+			answer = answer / 10;
+			q++;
 		}
 	}
-	last = last + '0';
-	write(1, &last, 1);
-	return (i);
+	_putchar(last_digit + '0');
+	return (q);
 }
 
 /**
- *i_specifier - prints when %d is used
- *@format_specifier: the string passed
- *Return: always success
+ * i_specifier - function name
+ * @format_specifier: va_list name
+ * Return: always success
+ *
  */
 int i_specifier(va_list format_specifier)
 {
-	int number = va_arg(format_specifier, int);
-	int figure, lastint = number % 10, digit, exp = 1;
-	int i = 1;
-	char digitint, last;
+	int next_argniaz = va_arg(format_specifier, int);
+	int numbs, last_digit = next_argniaz % 10, figure, answer = 1;
+	int q = 1;
 
-	number = number / 10;
-	figure = number;
+	next_argniaz = next_argniaz / 10;
+	numbs = next_argniaz;
 
-	if (lastint < 0)
+	if (last_digit < 0)
 	{
-		write(1, "-", 1);
-		figure = -figure;
-		number = -number;
-		lastint = -lastint;
-		i++;
+		_putchar('-');
+		numbs = -numbs;
+		next_argniaz = -next_argniaz;
+		last_digit = -last_digit;
+		q++;
 	}
-	if (figure > 0)
+	if (numbs > 0)
 	{
-		while (figure / 10 != 0)
+		while (numbs / 10 != 0)
 		{
-			exp = exp * 10;
-			figure = figure / 10;
+			answer = answer * 10;
+			numbs = numbs / 10;
 		}
-		figure = number;
-		while (exp > 0)
+		numbs = next_argniaz;
+		while (answer > 0)
 		{
-			digit = figure / exp;
-			digitint = digit + '0';
-			write(1, &digitint, 1);
-			figure = figure - (digit * exp);
-			exp = exp / 10;
-			i++;
+			figure = numbs / answer;
+			_putchar(figure + '0');
+			numbs = numbs - (figure * answer);
+			answer = answer / 10;
+			q++;
 		}
 	}
-	last = last + '0';
-	write(1, &last, 1);
-	return (i);
+	_putchar(last_digit + '0');
+	return (q);
 }
