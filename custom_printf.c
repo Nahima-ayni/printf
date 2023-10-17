@@ -10,7 +10,8 @@ int _printf(const char *format, ...)
 	int character_printed = 0, i = 0, v;
 	va_list formspec_args;
 	specifier m[] = { {"%s", s_specifier}, {"%c", c_specifier},
-		{"%i", i_specifier}, {"%d", d_specifier}, {"%%", mod_specifier} };
+		{"%i", i_specifier}, {"%d", d_specifier}, {"%%", mod_specifier},
+		{"%b", b_specifier}};
 
 	va_start(formspec_args, format);
 	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
@@ -19,7 +20,7 @@ int _printf(const char *format, ...)
 Here:
 	while (format[i] != '\0')
 	{
-		v = 4;
+		v = 5;
 		while (v >= 0)
 		{
 			if (m[v].format_specifier[0] == format[i] &&

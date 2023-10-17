@@ -14,7 +14,7 @@ typedef struct modify
 	int (*signature) ();
 }specifier;
 
-int _integers(int a);
+int b_specifier(va_list format_specifier);
 int _printf(const char *format, ...);
 int s_specifier(va_list format_specifier);
 int c_specifier(va_list format_specifier);
