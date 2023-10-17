@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- *
- *
- *
+ *b_specifier - prints binary
+ *@format_specifier: a  string
+ *Return: always success
  */
 int b_specifier(va_list format_specifier)
 {
